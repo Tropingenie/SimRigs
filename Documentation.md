@@ -65,9 +65,23 @@ To get any more specific, I'll need to look at the specific train I am designing
 
 But there's a wrench in the works here too: While we can put stoppers on the "increase throttle" and "decrease brake" of the two levers, thus giving a satisfying stopping point, we can't do that to the "increase brake force" position. But without physical feedback to the user, it's going to be way too easy to accidentally throw the power lever into the full braking position. At the moment, I can only think of Rube Goldberg solutions to this problem, such as embedding momentary buttons into the semicircles. If I'm going to use buttons though, I'll need to make sure the ball plunger has a strong enough spring to actuate the button, and I may want to just use buttons in every position at that point (that also saves us needing to print gears). We'll see.
 
-Overall, then, my design on a napkin is as follows:
+Overall, then, my throttle design on a napkin is as follows (with only the one button indicated, though the more I think on it I am leaning towards individual buttons for each position):
 
 ![alt text](image.png) ![alt text](image-1.png)
 ![](PXL_20240628_003843990.MP.jpg)
 
 ### 3. Digital Connections (i.e. buttons and switches)
+
+Section Summary
+- [olo101's Simrig Setup](https://forum.simrail.eu/topic/6202-diy-custom-game-controller/) 
+- [Shoft Register with Arduino Tutorial](https://www.makerguides.com/more-inputs-with74hc1655-shift-register/)
+
+[olo101](https://forum.simrail.eu/topic/6202-diy-custom-game-controller/) has a system they describe on the SimRail forums that uses shift registers for button input. The included pdf has an explanation of valid SimRail inputs as well, but I'll need to verify that later. However, the idea of shift registers I found worth exploring, and found out they are a simple way to "expand" the I/O of an Arduino using some clever code. olo101 used CD4021 shift registers, but the more common [74HC165](https://www.aliexpress.com/w/wholesale-74HC165.html) are more common, and therefore both cheaper on Ali and have [ready-made tutorials](https://www.makerguides.com/more-inputs-with74hc1655-shift-register/). If I end up using a lot of buttons instead of a potentiometor for my throttles, this will be of great help since I'd otherwise quickly run out of GPIO pins.
+
+As for the buttons themselves, at the moment I plan to breadboard my design using the buttons included with [this kit](https://www.aliexpress.com/item/1005006480276775.html). If they don't feel too squish I'll stick with them, but I expect to have to swap to a different button with 3D printed covers to get enough travel and tactility out of the buttons.
+
+[Proper rotary switches](https://www.aliexpress.com/item/32808848175.html) are expensive. Additionally, the square style ones are used only on the older locos, and so are useless for the initial EN76 build. However, if they do what I think, [RS25](https://www.aliexpress.com/w/wholesale-RS25.html) or RS1010 band selectors should do the trick (again with 3D printed covers). Regardless, these are low priority since they aren't used much.
+
+[Toggle switches](https://www.aliexpress.com/w/wholesale-toggle-switch.html) are dime a dozen, and good for any two position switch (which in the EN76 is basically only the pantographs?). Something like this [momentary toggle switch](https://www.aliexpress.com/item/32815002670.html) with its (ON)-OFF-(ON) configuration could also be useful for things like horn handles (though a modified [2 position momentary joystick switch](https://www.aliexpress.com/item/32857525061.html) would probably work better).
+
+I also found a good, albeit expensive, button that would work as the [emergency stop](https://www.aliexpress.com/item/1005007160708559.html). And a [mushroom head button](https://www.aliexpress.com/w/wholesale-mushroom-head-momentary-push-button.html) likewise is an expensive but easy way to make the SHP acknowledge button.
