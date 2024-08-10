@@ -37,4 +37,93 @@ The final product I have found is [SimHub](https://www.simhubdash.com/). Simhub 
 
 ## The Specifics
 
-I will be basing the available controls on [this Steam guide by lapidary.master](https://steamcommunity.com/sharedfiles/filedetails/?id=2378657608), though obviously updating it to the 2024 control scheme by verifying manually in-game.
+I will be basing the available controls on [this Steam guide by lapidary.master](https://steamcommunity.com/sharedfiles/filedetails/?id=2378657608), though obviously updating it to the 2024 control scheme by verifying manually in-game. Therefore, we have the following list of possible (and default) bindings:
+
+```
+Truck Controls
+| Function                            |   Primary   |  Secondary  |
+| ----------------------------------- | ----------- | ----------- |
+| Throttle                            |  Up   Arrow |      W      |
+| Brake / Reverse                     | Down  Arrow |      S      |
+| Steering Left                       | Left  Arrow |      A      |
+| Steering Right                      | Right Arrow |      D      |
+| Shift Up                            | Left  Shift | Right Shift |
+| Shift Down                          | Left  Ctrl  | Right  Ctrl |
+| Shift to Neutral                    |     N/A     |     N/A     |
+| Shift Up Hint                       |     N/A     |     N/A     |
+| Shift Down Hint                     |     N/A     |     N/A     |
+| Gearbox Switch Automatic/Sequential |     N/A     |     N/A     |
+| Start/Stop Engine                   |      E      |     N/A     |
+| Start/Stop Engine Electricity       |     N/A     |     N/A     |
+| Parking Brake                       |    Space    |     N/A     |
+| Engine Brake                        |      B      |     N/A     |
+| Engine Brake Toggle                 |     N/A     |     N/A     |
+| Engine Brake Increase               |     N/A     |     N/A     |
+| Engine Brake Decrease               |     N/A     |     N/A     |
+| Trailer Brake                       |     N/A     |     N/A     |
+| Retarder Increase                   |      ;      |     N/A     |
+| Retarder Decrease                   |      '      |     N/A     |
+| Lift/Drop Axle                      |      U      |     N/A     |
+| Lift/Drop Trailer Axle              |     N/A     |     N/A     |
+| Differential Lock                   |      V      |     N/A     |
+| Front Suspension Up                 |     N/A     |     N/A     |
+| Front Suspension Down               |     N/A     |     N/A     |
+| Rear Suspension Up                  |     N/A     |     N/A     |
+| Rear Suspension Down                |     N/A     |     N/A     |
+| Suspension Reset                    |     N/A     |     N/A     |
+| Left-Turn Indicator                 |      [      |     N/A     |
+| Right-Turn Indicator                |      ]      |     N/A     |
+| Hazard Warning                      |      F      |     N/A     |
+| Light Modes                         |      L      |     N/A     |
+| High Beam Headlights                |      K      |     N/A     |
+| Beacon                              |      O      |     N/A     |
+| Horn                                |      H      |     N/A     |
+| Air Horn                            |      N      |     N/A     |
+| Light Horn                          |      J      |     N/A     |
+| Wipers                              |      P      |     N/A     |
+| Wipers Back                         |     N/A     |     N/A     |
+| Cruise Control                      |      C      |     N/A     |
+| Cruise Control Speed Increase       |     N/A     |     N/A     |
+| Cruise Control Speed Decrease       |     N/A     |     N/A     |
+| Cruise Control Resume               |     N/A     |     N/A     |
+| Adaptive Cruise Control Mode        |     N/A     |     N/A     |
+| Emergency Brake                     |     N/A     |     N/A     |
+| Lane Keeping Assistant              |     N/A     |     N/A     |
+| Lane Assist Mode                    |     N/A     |     N/A     |
+| Dashboard Display Mode              |      I      |     N/A     |
+| Infotainment Display Mode           |     N/A     |     N/A     |
+| Navigation Zoom Mode                |     N/A     |     N/A     |
+| Trip Info Reset                     |     N/A     |     N/A     |
+| Open Right Window                   |     N/A     |     N/A     |
+| Close Right Window                  |     N/A     |     N/A     |
+| Open Left Window                    |     N/A     |     N/A     |
+| Close Left Window                   |     N/A     |     N/A     |
+```
+
+Annoyingly, this does show that even in 2024 we'll have to apply George's manual controls.sii edits so that the key of the rig works properly, since `ignitionoff` and the other related settings do not have an in-game GUI. [George's button box](https://forum.scssoft.com/viewtopic.php?p=1697950) also seems like a good place to draw inspiration from, as they describe more edits you can do to the `controls.sii` to get the behaviors you want. The major difference is I will be leveraging the Arduino Leonardo's keyboard library, rather than encoding as controller inputs.
+
+Regardless, I can worry about that later, since to start I'll be working off a breadboard, and I already have the engine bound to the "options" button of my T300. I also use automatic retarder and engine brake, and while I plan to learn realistic air simulation at some point... Well, I actually can't figure out the most realistic retarder and engine brake settings. Best I can find is a [Reddit discussion](https://www.reddit.com/r/trucksim/comments/17be9n0/realistic_use_of_engine_brake_and_retarder/) from which I conclude I'll need a retarder lever on the rig at some point. Lots of other settings are likewise on auto or already bound. Long story short, then, my candidates for this breadboarded button panel are:
+- Retarder Increase
+- Retarder Decrease
+- Differential Lock
+- Front Suspension Up
+- Front Suspension Down
+- Rear Suspension Up
+- Rear Suspension Down
+- Suspension Reset
+- Dashboard Display Mode
+- Infotainment Display Mode
+- Trip Info Reset
+- Open Left Window
+- Close Left Window
+
+This list covers basically every control I feel is "missing" from my current setup. YMMV. I also honestly could play without a lot of these (like suspension height adjust), or rather, already do play without using most of these. I think the only one I've used is the differential lock, and I just press the keyboard button... Frankly I get the feeling I should work on the frame of the rig first, then add all the buttons and dials into a "cockpit" to make sitting in it feel realistic, but I digress.
+
+Something I really feel is missing most is the dashboard/infotainment controls. I've always been annoyed by certain default settings, but in my stupor never bothered to push the damn `I` key while I still remember it changed the dash settings. So I think I'll start with those, and the window controls for good measure. That is, this initial design will include buttons for:
+- Dashboard Display Mode (`I`)
+- Infotainment Display Mode
+- Trip Info Reset
+- Open Left Window
+- Close Left Window
+
+While the first of these has a default binding, I need to come up with bindings and combinations for the rest. I also need to make sure these are unique, so there are no overlapping bindings. Thus, I must create a spreadsheet containing all the bindings, and in the interest of FOSS principles it must be stored here in the repo. I am really looking forward to this... :D
