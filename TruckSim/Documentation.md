@@ -140,4 +140,4 @@ My final bindings looked as follows:
 
 <img src="image-1.png" width="400">
 
-However, this still highlighted another issue: My windows were done wrong, as I had mistakenly assumed they were toggles. Still, it isn't a hard change to make since Keyboard supports "hitting" and "releasing" keys seperately.
+However, this still highlighted another issue: My windows were done wrong, as I had mistakenly assumed they were toggles. Still, it wasn't a hard change to make since Keyboard supports "hitting" and "releasing" keys seperately.
