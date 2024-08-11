@@ -141,3 +141,7 @@ My final bindings looked as follows:
 <img src="image-1.png" width="400">
 
 However, this still highlighted another issue: My windows were done wrong, as I had mistakenly assumed they were toggles. Still, it wasn't a hard change to make since Keyboard supports "hitting" and "releasing" keys seperately.
+
+Moving on, I wanted to use a Joystick library to circumvent the 'keystroke' limitations, since as far as I am aware ETS should handle seperate "game controllers" better than it does keyboards. As mentioned earlier, I'll be using [ArduinoJoystick by MHeironimus](https://github.com/MHeironimus/ArduinoJoystickLibrary/) to do so, which comes with the caveat that the library *isn't* available right through the Arduino IDE. Furthermore, since the Arduino IDE has its own build steps, it doesn't allow me to just `#include` straight from the submodule. Long story short, if you're following along make sure to add the `ArduinoJoystick.zip` file as a library in the Arduino IDE.
+
+`ArduinoJoystick` is written in such a way that it mimics the `Keyboard` library, so after initializing an 6 button device based on the [ArcadeStickExample](https://github.com/MHeironimus/ArduinoJoystickLibrary/blob/master/examples/ArcadeStickExample/ArcadeStickExample.ino) I swapped the calls in my `buttonHandler` to send joystick buttons 0-5 instead (and also filled in the missing button 6 `case`).

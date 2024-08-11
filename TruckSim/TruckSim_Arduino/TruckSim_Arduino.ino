@@ -11,7 +11,6 @@ enum gpioAssignments{
   GPIO_BUTTON_6
 };
 
-
 enum idAssignments{
   ID_BUTTON_1 = 1,
   ID_BUTTON_2,
@@ -21,8 +20,17 @@ enum idAssignments{
   ID_BUTTON_6
 };
 
+static Joystick_ Joystick(
+  JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
+  6, 0,                  // Button Count, Hat Switch Count
+  false, false, false,   // No X, Y, or Z Axis
+  false, false, false,   // No Rx, Ry, or Rz
+  false, false,          // No rudder or throttle
+  false, false, false  // No accelerator, brake, or steering
+  );
 
 bool buttonStates[] = {false, false, false, false, false, false};
+
 
 static void buttonHandler(uint8_t btnId, uint8_t btnState) {
   if (btnState == BTN_PRESSED) {
@@ -31,22 +39,27 @@ static void buttonHandler(uint8_t btnId, uint8_t btnState) {
     // See https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/
     switch (btnId){
       case ID_BUTTON_1:
-        Keyboard.press('i');
+        // Keyboard.press('i');
+        Joystick.pressButton(0);
       break;
       case ID_BUTTON_2:
-        Keyboard.press(',');
+        // Keyboard.press(',');
+        Joystick.pressButton(1);
       break;
       case ID_BUTTON_3:
-        Keyboard.press('.');
+        // Keyboard.press('.');
+        Joystick.pressButton(2);
       break;
       case ID_BUTTON_4:
-        Keyboard.press('/');
+        // Keyboard.press('/');
+        Joystick.pressButton(3);
       break;
       case ID_BUTTON_5:
-        Keyboard.press('`');
+        // Keyboard.press('`');
+        Joystick.pressButton(4);
       break;
       case ID_BUTTON_6:
-      
+        Joystick.pressButton(5);
       break;
     }
   } else {
@@ -55,22 +68,27 @@ static void buttonHandler(uint8_t btnId, uint8_t btnState) {
     buttonStates[btnId-1] = false;
     switch (btnId){
       case ID_BUTTON_1:
-        Keyboard.release('i');
+        // Keyboard.release('i');
+        Joystick.releaseButton(0);
       break;
       case ID_BUTTON_2:
-        Keyboard.release(',');
+        // Keyboard.release(',');
+        Joystick.releaseButton(1);
       break;
       case ID_BUTTON_3:
-        Keyboard.release('.');
+        // Keyboard.release('.');
+        Joystick.releaseButton(2);
       break;
       case ID_BUTTON_4:
-        Keyboard.release('/');
+        // Keyboard.release('/');
+        Joystick.releaseButton(3);
       break;
       case ID_BUTTON_5:
-        Keyboard.release('`');
+        // Keyboard.release('`');
+        Joystick.releaseButton(4);
       break;
       case ID_BUTTON_6:
-      
+        Joystick.releaseButton(5);
       break;
     }
   }
@@ -83,16 +101,6 @@ static Button buttonThree(ID_BUTTON_3, buttonHandler);
 static Button buttonFour(ID_BUTTON_4, buttonHandler);
 static Button buttonFive(ID_BUTTON_5, buttonHandler);
 static Button buttonSix(ID_BUTTON_6, buttonHandler);
-
-
-static Joystick_ Joystick(
-  JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
-  8, 0,                  // Button Count, Hat Switch Count
-  false, false, false,   // No X, Y, or Z Axis
-  false, false, false,   // No Rx, Ry, or Rz
-  false, false,          // No rudder or throttle
-  false, false, false  // No accelerator, brake, or steering
-  );
 
 
 void setup() {
