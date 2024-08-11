@@ -37,60 +37,12 @@ static void buttonHandler(uint8_t btnId, uint8_t btnState) {
     Serial.println((String)"Pushed button " + btnId);
     buttonStates[btnId-1] = true;
     // See https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/
-    switch (btnId){
-      case ID_BUTTON_1:
-        // Keyboard.press('i');
-        Joystick.pressButton(0);
-      break;
-      case ID_BUTTON_2:
-        // Keyboard.press(',');
-        Joystick.pressButton(1);
-      break;
-      case ID_BUTTON_3:
-        // Keyboard.press('.');
-        Joystick.pressButton(2);
-      break;
-      case ID_BUTTON_4:
-        // Keyboard.press('/');
-        Joystick.pressButton(3);
-      break;
-      case ID_BUTTON_5:
-        // Keyboard.press('`');
-        Joystick.pressButton(4);
-      break;
-      case ID_BUTTON_6:
-        Joystick.pressButton(5);
-      break;
-    }
+    Joystick.pressButton(btnId-1);
   } else {
     // btnState == BTN_OPEN.
     Serial.println((String)"Released button " + btnId);
     buttonStates[btnId-1] = false;
-    switch (btnId){
-      case ID_BUTTON_1:
-        // Keyboard.release('i');
-        Joystick.releaseButton(0);
-      break;
-      case ID_BUTTON_2:
-        // Keyboard.release(',');
-        Joystick.releaseButton(1);
-      break;
-      case ID_BUTTON_3:
-        // Keyboard.release('.');
-        Joystick.releaseButton(2);
-      break;
-      case ID_BUTTON_4:
-        // Keyboard.release('/');
-        Joystick.releaseButton(3);
-      break;
-      case ID_BUTTON_5:
-        // Keyboard.release('`');
-        Joystick.releaseButton(4);
-      break;
-      case ID_BUTTON_6:
-        Joystick.releaseButton(5);
-      break;
-    }
+    Joystick.releaseButton(btnId-1);
   }
 }
 
