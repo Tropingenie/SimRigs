@@ -31,23 +31,18 @@ static void buttonHandler(uint8_t btnId, uint8_t btnState) {
     switch (btnId){
       case ID_BUTTON_1:
         Keyboard.press('i');
-        Keyboard.releaseAll();
       break;
       case ID_BUTTON_2:
         Keyboard.press(',');
-        Keyboard.releaseAll();
       break;
       case ID_BUTTON_3:
         Keyboard.press('.');
-        Keyboard.releaseAll();
       break;
       case ID_BUTTON_4:
         Keyboard.press('/');
-        Keyboard.releaseAll();
       break;
       case ID_BUTTON_5:
         Keyboard.press('`');
-        Keyboard.releaseAll();
       break;
       case ID_BUTTON_6:
       
@@ -57,6 +52,26 @@ static void buttonHandler(uint8_t btnId, uint8_t btnState) {
     // btnState == BTN_OPEN.
     Serial.println((String)"Released button " + btnId);
     buttonStates[btnId-1] = false;
+    switch (btnId){
+      case ID_BUTTON_1:
+        Keyboard.release('i');
+      break;
+      case ID_BUTTON_2:
+        Keyboard.release(',');
+      break;
+      case ID_BUTTON_3:
+        Keyboard.release('.');
+      break;
+      case ID_BUTTON_4:
+        Keyboard.release('/');
+      break;
+      case ID_BUTTON_5:
+        Keyboard.release('`');
+      break;
+      case ID_BUTTON_6:
+      
+      break;
+    }
   }
 }
 

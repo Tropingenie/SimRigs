@@ -123,7 +123,7 @@ This list covers basically every control I feel is "missing" from my current set
 
 Something I really feel is missing most is the dashboard/infotainment controls. I've always been annoyed by certain default settings, but in my stupor never bothered to push the damn `I` key while I still remember it changed the dash settings. So I think I'll start with those, and the window controls for good measure. That is, this initial design will include buttons for:
 - Dashboard Display Mode (`I`)
-- Infotainment Display Mode
+- Navigation Zoom Mode
 - Trip Info Reset
 - Open Left Window
 - Close Left Window
@@ -135,3 +135,9 @@ That said, I'll ignore that problem for now in favor of getting my Leonardo up a
 <img src="image.png" width="400">
 
 From here, it's a simple matter to put in a switch-case statement based on `btnId` and send the keystrokes accordingly using [Keyboard](https://www.arduino.cc/reference/en/language/functions/usb/keyboard/). For button 1, I decided to send `i` so I can use that as my infotainment button, while the others will be for controls that have no default binding. Initially, I sent the `ctrl` key followed by an arbitrary letter, but as it turns out ETS (and so I assume ATS as well) doesn't accept modifier keys. Through trial and error, I settled on sending the keys `,./` and the one that shares `~`(Markdown nerds know why I have to say it that way). I'll probably switch to the [(non-name brand) Joystick library](https://github.com/MHeironimus/ArduinoJoystickLibrary/) instead, based on [this tutorial](https://www.instructables.com/Arduino-LeonardoMicro-as-Game-ControllerJoystick/).
+
+My final bindings looked as follows:
+
+<img src="image-1.png" width="400">
+
+However, this still highlighted another issue: My windows were done wrong, as I had mistakenly assumed they were toggles. Still, it isn't a hard change to make since Keyboard supports "hitting" and "releasing" keys seperately.
