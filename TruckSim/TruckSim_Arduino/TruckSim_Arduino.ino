@@ -34,29 +34,23 @@ static void buttonHandler(uint8_t btnId, uint8_t btnState) {
         Keyboard.releaseAll();
       break;
       case ID_BUTTON_2:
-        Keyboard.press(KEY_LEFT_CTRL);
-        Keyboard.press('b');
+        Keyboard.press(',');
         Keyboard.releaseAll();
       break;
       case ID_BUTTON_3:
-        Keyboard.press(KEY_LEFT_CTRL);
-        Keyboard.press('c');
+        Keyboard.press('.');
         Keyboard.releaseAll();
       break;
       case ID_BUTTON_4:
-        Keyboard.press(KEY_LEFT_CTRL);
-        Keyboard.press('d');
+        Keyboard.press('/');
         Keyboard.releaseAll();
       break;
       case ID_BUTTON_5:
-        Keyboard.press(KEY_LEFT_CTRL);
-        Keyboard.press('e');
+        Keyboard.press('`');
         Keyboard.releaseAll();
       break;
       case ID_BUTTON_6:
-        Keyboard.press(KEY_LEFT_CTRL);
-        Keyboard.press('f');
-        Keyboard.releaseAll();
+      
       break;
     }
   } else {
