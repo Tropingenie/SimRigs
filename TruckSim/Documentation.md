@@ -39,6 +39,8 @@ The final product I have found is [SimHub](https://www.simhubdash.com/). Simhub 
 
 ## The Specifics
 
+## The Code
+
 I will be basing the available controls on [this Steam guide by lapidary.master](https://steamcommunity.com/sharedfiles/filedetails/?id=2378657608), though obviously updating it to the 2024 control scheme by verifying manually in-game. Therefore, we have the following list of possible (and default) bindings:
 
 ```
@@ -145,3 +147,29 @@ However, this still highlighted another issue: My windows were done wrong, as I 
 Moving on, I wanted to use a Joystick library to circumvent the 'keystroke' limitations, since as far as I am aware ETS should handle seperate "game controllers" better than it does keyboards. As mentioned earlier, I'll be using [ArduinoJoystick by MHeironimus](https://github.com/MHeironimus/ArduinoJoystickLibrary/) to do so, which comes with the caveat that the library *isn't* available right through the Arduino IDE. Furthermore, since the Arduino IDE has its own build steps, it doesn't allow me to just `#include` straight from the submodule. Long story short, if you're following along make sure to add the `ArduinoJoystick.zip` file as a library in the Arduino IDE.
 
 `ArduinoJoystick` is written in such a way that it mimics the `Keyboard` library, so after initializing an 6 button device based on the [ArcadeStickExample](https://github.com/MHeironimus/ArduinoJoystickLibrary/blob/master/examples/ArcadeStickExample/ArcadeStickExample.ino) I swapped the calls in my `buttonHandler` to send joystick buttons 0-5 instead (and also filled in the missing button 6 `case`). With the Joystick library, a switch-case is no longer necessary, since I can send `int` directly into the `pressButton` and `releaseButton` function, so as a side effect the code is cleaner and more extensible now (since there's one less 'thing' to update if I choose to add more buttons).
+
+## The Rig
+
+While coming up with code and throwing a breadboard in a cardboard box is fun, we'll also need something to mount everything to (preferably with a nice set of castor wheels to make it portable). As mentioned, I already have a wheel and pedals, so it all comes down to mounting. Extruded aluminum rigs are pretty common thanks to the simracing scene, but to keep costs low I'm aiming to use pine (or another cheap wood) 2x4s held together with a box of screws from the Home Depot near me.
+
+For starters, I need to know how much wood to buy, and to do that I need to dimension in my rig. It'll also help to have some idea of "how" everything needs to be mounted, since unlike a fancier rig this one will not be adjustable (easily--you can always measure once cut twice). [dragos87](https://www.reddit.com/r/trucksim/comments/1ao65rq/trucking_position_in_a_simrig/) posted a good picture showing a side profile of what I want to aim for the wheel, while a quick google search finds an (American) example of the pedals: A fairly high angle on the steering wheel such that is sits "flatter," and a similar lift on the pedals so they aren't as vertical as the default base.
+
+<img src="image-2.png" height="300"><img src="image-3.png" height="300">
+
+To put that into numbers, I want my wheel to be mounted at about 30 degrees, while my pedals should sit at around 10. This, plus the natural angles they already have, should place us at a comfortable angle.
+
+One other thing I can see in the images above is that I'll almost definitely need some sort of raised mounting for the seat. It's not uncommon to go to your local auto wrecker to get a real seat from a pickup truck, and I plan to do exactly that. Another thing to worry about is how exactly I will fit into the seat--maybe an adjustable wheel is in the cards, but more likely the seat will need to be adjustable (which since it is a "real" car's seat just means I need to make sure I pick one that does that).
+
+All in all, then, the design on a napkin is as follows:
+
+<img src="image-4.png" width="400">
+
+The dimensions are, of course, hopelessly not to scale, obvious from the stick figure's hands being in the completely wrong places and the angle of the wheel being not quite what I want. I'll likely also make a more "horizontal" shelf on the right side of the right of the rig so I can mount a shifter and button box at some point.
+
+Regardless, my current setup using an office chair provides a good starting point for the dimensions I need. Adding these adjustments:
+
+<img src="image-5.png" width="400">
+
+Included here are the dimensions of two vertical beams that hold up the wheel (55 and 65), the calculations for a triangular "mounting plate" of the wheel and the pedals, the distance from the front of the pedals to the *middle* of the seat (since it is adjustable), and the height to the bottom of the seat. Not included are the horizontal planks, which need to accomodate the 33cm wide wheel base, 34cm wide pedals base, and however wide the seat needs (which I'll assume is somewhere around 23cm). I'll also probably want a sheet of decently thick plywood eventually just to cover some stuff up, which sets a roughly 2'x4' (60x120 cm) footprint, more than enough to work with.
+
+So using a frame of 2"x4"s that means I need 12' for the regtangular base, two 65cm lengths, two 55cm lengths, 4 45cm lengths, two 10cm lengths, two 18cm lengths, and two 7cm lengths, or 8.5m/334" (or about 28') total (I love living in western Canada where some things are sold by the meter and others by the foot). I'll also need a 20x60cm and a 39x40cm sheet of 3/4" plywood for the wheel and pedal mounting respectively (i.e. one 2"x2" sheet of plywood). I'll also want two 30 degree brackets (if those exist), 8 90 degree brackets, and enough Robertson wood screws to build a barn.
