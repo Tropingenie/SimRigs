@@ -1,5 +1,6 @@
 #include <debounce.h>
 #include <Keyboard.h>
+#include <Joystick.h>
 
 enum gpioAssignments{
   GPIO_BUTTON_1 = 2,
@@ -84,10 +85,21 @@ static Button buttonFive(ID_BUTTON_5, buttonHandler);
 static Button buttonSix(ID_BUTTON_6, buttonHandler);
 
 
+static Joystick_ Joystick(
+  JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
+  8, 0,                  // Button Count, Hat Switch Count
+  false, false, false,   // No X, Y, or Z Axis
+  false, false, false,   // No Rx, Ry, or Rz
+  false, false,          // No rudder or throttle
+  false, false, false  // No accelerator, brake, or steering
+  );
+
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   Keyboard.begin();
+  Joystick.begin();
   pinMode(GPIO_BUTTON_1, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_2, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_3, INPUT_PULLUP);
@@ -97,7 +109,7 @@ void setup() {
 }
 
 
-static void pollButtons() {
+static inline void pollButtons() {
   // update() will call buttonHandler() if PIN transitions to a new state and stays there
   // for multiple reads over 25+ ms.
   buttonOne.update(digitalRead(GPIO_BUTTON_1));

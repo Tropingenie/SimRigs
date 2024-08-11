@@ -1,0 +1,3 @@
+[submodule "TruckSim/TruckSim_Arduino/ArduinoJoystickLibrary"]
+	path = TruckSim/TruckSim_Arduino/ArduinoJoystickLibrary
+	url = https://github.com/MHeironimus/ArduinoJoystickLibrary.git
