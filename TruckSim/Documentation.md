@@ -148,6 +148,22 @@ Moving on, I wanted to use a Joystick library to circumvent the 'keystroke' limi
 
 `ArduinoJoystick` is written in such a way that it mimics the `Keyboard` library, so after initializing an 6 button device based on the [ArcadeStickExample](https://github.com/MHeironimus/ArduinoJoystickLibrary/blob/master/examples/ArcadeStickExample/ArcadeStickExample.ino) I swapped the calls in my `buttonHandler` to send joystick buttons 0-5 instead (and also filled in the missing button 6 `case`). With the Joystick library, a switch-case is no longer necessary, since I can send `int` directly into the `pressButton` and `releaseButton` function, so as a side effect the code is cleaner and more extensible now (since there's one less 'thing' to update if I choose to add more buttons).
 
+## The Electronics
+
+With working code, I can work on the electronics. That said, until I can get the rig up (and my 3D printer working), anything resembling a commercial button box is simply not going to happen. Still, armed with a breadboard and an Amazon box, I purchased [some buttons](https://www.amazon.ca/dp/B08R9P9DFC?psc=1) and quickly threw together a prototype button box that *wouldn't* fall apart as I used it (or at least fall apart slower--still, those tactile buttons did *not* play well with my breadboard). At the very least, I now have something I can use while playing the game, even if it looks like, well, a cardboard box.
+
+<img src="image-9.png" width="400"><img src="image-10.png" width="400">
+
+A cardboard box is an idea I got from another forum post, which sadly I can't find a source for, but it actually works great for this initial mock up. I'll likely stick with it for the forseeable future, since I still plan to add some sort of indicator stalk and wiper stalk using a ["joystick switch"](https://www.aliexpress.com/w/wholesale-joystick-momentary-switch.html) (AKA a ["monolever toggle switch"](https://www.aliexpress.com/w/wholesale-monolever-toggle-switch.html)), and the box should help with the initial mounting of that as well. Sadly, I don't have an easily moddable Fanatec wheel like [amstudio](https://www.youtube.com/watch?v=04JuIH6fyoU) shows in their video on how to make an indicator, so I either have to figure out how to 3D print my own equivalent bracket, or mount the lever to the button box like [GeorgeT93](https://forum.scssoft.com/viewtopic.php?p=1697950) has done.
+
+<img src="image-11.png" width="400"><img src="image-12.png" width="400">
+
+Or I guess I could just buy a [real indicator switch](https://www.aliexpress.com/w/wholesale-turn-indicator-lever.html), like [hydr0wry](https://www.youtube.com/watch?v=jVhm9MZV-tQ) on YouTube does, but while that answers the question of what functions to use it for, it still doesn't solve the mounting problem.
+
+There is, of course, also the problem that the game doesn't exactly output the turn signal position, so there's no way for *my* hardware to know when to "recenter" the stalk. I'll need to look into this more, but both amstudio and GeorgeT93 seem to be using momentary switches and just letting the game shut off the indicators after a turn, but I find my turns are often too shallow for the automatic system to kick in and manually intervene. The only other way I can think of is to use a latching switch, and manually recenter it each time to turn the indicator off.
+
+That said, using a latching switch doesn't mean I *have* to turn off the "automatic indicator off" function in-game, though that would result in the odd behavior where if I want to turn in the same direction twice in a row I need to manually toggle the switch off. The other option I can think of is to use a button to turn off the indicators, and go back to the original idea of a momentary switch. Really, the decision boils down to "what feels best", so I may have to pick up some parts on Amazon and return what I don't like before I really know what I want. Since I've got a spare button, I'll try the momentary switch to start.
+
 ## The Rig
 
 While coming up with code and throwing a breadboard in a cardboard box is fun, we'll also need something to mount everything to (preferably with a nice set of castor wheels to make it portable). As mentioned, I already have a wheel and pedals, so it all comes down to mounting. Extruded aluminum rigs are pretty common thanks to the simracing scene, but to keep costs low I'm aiming to use pine (or another cheap wood) 2x4s held together with a box of screws from the Home Depot near me.
