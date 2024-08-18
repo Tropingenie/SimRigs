@@ -160,10 +160,6 @@ A cardboard box is an idea I got from another forum post, which sadly I can't fi
 
 Or I guess I could just buy a [real indicator switch](https://www.aliexpress.com/w/wholesale-turn-indicator-lever.html), like [hydr0wry](https://www.youtube.com/watch?v=jVhm9MZV-tQ) on YouTube does, but while that answers the question of what functions to use it for, it still doesn't solve the mounting problem.
 
-There is, of course, also the problem that the game doesn't exactly output the turn signal position, so there's no way for *my* hardware to know when to "recenter" the stalk. I'll need to look into this more, but both amstudio and GeorgeT93 seem to be using momentary switches and just letting the game shut off the indicators after a turn, but I find my turns are often too shallow for the automatic system to kick in and manually intervene. The only other way I can think of is to use a latching switch, and manually recenter it each time to turn the indicator off.
-
-That said, using a latching switch doesn't mean I *have* to turn off the "automatic indicator off" function in-game, though that would result in the odd behavior where if I want to turn in the same direction twice in a row I need to manually toggle the switch off. The other option I can think of is to use a button to turn off the indicators, and go back to the original idea of a momentary switch. Really, the decision boils down to "what feels best", so I may have to pick up some parts on Amazon and return what I don't like before I really know what I want. Since I've got a spare button, I'll try the momentary switch to start.
-
 ## The Rig
 
 While coming up with code and throwing a breadboard in a cardboard box is fun, we'll also need something to mount everything to (preferably with a nice set of castor wheels to make it portable). As mentioned, I already have a wheel and pedals, so it all comes down to mounting. Extruded aluminum rigs are pretty common thanks to the simracing scene, but to keep costs low I'm aiming to use pine (or another cheap wood) 2x4s held together with a box of screws from the Home Depot near me.
@@ -202,6 +198,12 @@ Manufacturing wise, the front shelf should be put together using [pocket screws]
 
 As mentioned, I want this to be able to slide under my desk (since I live in a relatively small apartment), which sets a height limit. The rear shelf is clearly well over that height limit, but I've left room so it's able to "fold down." While you're free to assemble the front shelf however you like, the rear shelf therefore needs to be held on with a single, sturdy bolt. I'll also be using something like a [bolt latch](https://www.amazon.ca/gp/product/B0892H3KMH/ref=ewc_pr_img_1?smid=AT0WUJIIRXYL8) to lock these posts in the upright position, and will likely add some sort of "end stop" in the future so the steering wheel doesn't press up against the seat or floor.
 
-Anything I haven't mentioned (plywood, frame, castor wheels, etc.) will be put together using Robertson wood or construction screws.
+~~Anything I haven't mentioned (plywood, frame, castor wheels, etc.) will be put together using Robertson wood or construction screws.~~
 
 <img src="image-7.png" height="300"><img src="image-8.png" height="300">
+
+With hardware in hand, I was able to start doing some real planning. I really prefer working hands on and physically prototyping, rather than planning everything meticulously, and this project is no different.
+
+The first problem I ran into was that 2x4s are not 2"x4", they're slightly smaller (more like 1.5x3"). Not particularly a problem materials-wise, since I'm buying plywood by the foot, but it does mean I need to double check my lengths will line up for the 2'x4' frame. The other problem this causes is that the bolts I bought are way too long. I bought 5 inch bolts, when I only need 3 inch bolts. In terms of other fasteners, I also need some three inch nails to nail the frame together, and the fence hangers I bought need 1.5' nails to hold the vertical 2x4s. As well, I'll need something to hold the sheet of plywood down, and thinking about it nails also make sense here--though, in this case there are plenty of nails that will work in a bucket at my parents' house.
+
+I also mocked up the chair, which allowed us to measure a comfortable height of 12 inches from the plywood, instead of the 8 inches I used for the CAD render above. We also measured, and even with the seat attached the cushion will be lower than the edge of my desk, and the higher seat position means I can have the more 'vertical' seated posture that I wanted. It does, however, mean that the wheel and pedal placement needs review; overall 4' might be too *long* of a rig, since it puts the console further than my arms can comfortably reach. The solution there is to go back to the drawing board and add some sort of "shelf" over the legs like you would see in a real vehicle.
