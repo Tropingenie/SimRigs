@@ -8,7 +8,9 @@ enum gpioAssignments{
   GPIO_BUTTON_3,
   GPIO_BUTTON_4,
   GPIO_BUTTON_5,
-  GPIO_BUTTON_6
+  GPIO_BUTTON_6,
+  GPIO_INDICATOR_1,
+  GPIO_INDICATOR_2,
 };
 
 enum idAssignments{
@@ -17,7 +19,9 @@ enum idAssignments{
   ID_BUTTON_3,
   ID_BUTTON_4,
   ID_BUTTON_5,
-  ID_BUTTON_6
+  ID_BUTTON_6,
+  ID_INDICATOR_1,
+  ID_INDICATOR_2,
 };
 
 static Joystick_ Joystick(
@@ -29,19 +33,19 @@ static Joystick_ Joystick(
   false, false, false  // No accelerator, brake, or steering
   );
 
-bool buttonStates[] = {false, false, false, false, false, false};
+// bool buttonStates[] = {false, false, false, false, false, false, false, false};
 
 
 static void buttonHandler(uint8_t btnId, uint8_t btnState) {
   if (btnState == BTN_PRESSED) {
     Serial.println((String)"Pushed button " + btnId);
-    buttonStates[btnId-1] = true;
+    // buttonStates[btnId-1] = true;
     // See https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/
     Joystick.pressButton(btnId-1);
   } else {
     // btnState == BTN_OPEN.
     Serial.println((String)"Released button " + btnId);
-    buttonStates[btnId-1] = false;
+    // buttonStates[btnId-1] = false;
     Joystick.releaseButton(btnId-1);
   }
 }
@@ -53,6 +57,8 @@ static Button buttonThree(ID_BUTTON_3, buttonHandler);
 static Button buttonFour(ID_BUTTON_4, buttonHandler);
 static Button buttonFive(ID_BUTTON_5, buttonHandler);
 static Button buttonSix(ID_BUTTON_6, buttonHandler);
+static Button indOne(ID_INDICATOR_1, buttonHandler);
+static Button indTwo(ID_INDICATOR_2, buttonHandler);
 
 
 void setup() {
@@ -66,6 +72,8 @@ void setup() {
   pinMode(GPIO_BUTTON_4, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_5, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_6, INPUT_PULLUP);
+  pinMode(GPIO_INDICATOR_1, INPUT_PULLUP);
+  pinMode(GPIO_INDICATOR_2, INPUT_PULLUP);
 }
 
 
@@ -77,7 +85,8 @@ static inline void pollButtons() {
   buttonThree.update(digitalRead(GPIO_BUTTON_3));
   buttonFour.update(digitalRead(GPIO_BUTTON_4));
   buttonFive.update(digitalRead(GPIO_BUTTON_5));
-  buttonSix.update(digitalRead(GPIO_BUTTON_6));
+  indOne.update(digitalRead(GPIO_INDICATOR_1));
+  indTwo.update(digitalRead(GPIO_INDICATOR_2));
 }
 
 
