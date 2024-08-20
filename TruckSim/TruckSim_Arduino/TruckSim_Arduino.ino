@@ -1,5 +1,5 @@
 #include <debounce.h>
-#include <Keyboard.h>
+// #include <Keyboard.h>
 #include <Joystick.h>
 
 enum gpioAssignments{
@@ -26,7 +26,7 @@ enum idAssignments{
 
 static Joystick_ Joystick(
   JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
-  6, 0,                  // Button Count, Hat Switch Count
+  32, 0,                  // Button Count, Hat Switch Count
   false, false, false,   // No X, Y, or Z Axis
   false, false, false,   // No Rx, Ry, or Rz
   false, false,          // No rudder or throttle
@@ -41,12 +41,12 @@ static void buttonHandler(uint8_t btnId, uint8_t btnState) {
     Serial.println((String)"Pushed button " + btnId);
     // buttonStates[btnId-1] = true;
     // See https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/
-    Joystick.pressButton(btnId-1);
+    Joystick.setButton(btnId-1, 1);
   } else {
     // btnState == BTN_OPEN.
     Serial.println((String)"Released button " + btnId);
     // buttonStates[btnId-1] = false;
-    Joystick.releaseButton(btnId-1);
+    Joystick.setButton(btnId-1, 0);
   }
 }
 
@@ -64,7 +64,7 @@ static Button indTwo(ID_INDICATOR_2, buttonHandler);
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  Keyboard.begin();
+  // Keyboard.begin();
   Joystick.begin();
   pinMode(GPIO_BUTTON_1, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_2, INPUT_PULLUP);
@@ -85,6 +85,7 @@ static inline void pollButtons() {
   buttonThree.update(digitalRead(GPIO_BUTTON_3));
   buttonFour.update(digitalRead(GPIO_BUTTON_4));
   buttonFive.update(digitalRead(GPIO_BUTTON_5));
+  buttonSix.update(digitalRead(GPIO_BUTTON_6));
   indOne.update(digitalRead(GPIO_INDICATOR_1));
   indTwo.update(digitalRead(GPIO_INDICATOR_2));
 }
