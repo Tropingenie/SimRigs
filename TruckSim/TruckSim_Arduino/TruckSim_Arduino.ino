@@ -7,7 +7,9 @@ enum gpioAssignments{
   GPIO_BUTTON_3,
   GPIO_BUTTON_4,
   GPIO_BUTTON_5,
-  GPIO_BUTTON_6
+  GPIO_BUTTON_6,
+  GPIO_BUTTON_7, // Indicator 1
+  GPIO_BUTTON_8  // Indicator 2
 };
 
 
@@ -17,7 +19,9 @@ enum idAssignments{
   ID_BUTTON_3,
   ID_BUTTON_4,
   ID_BUTTON_5,
-  ID_BUTTON_6
+  ID_BUTTON_6,
+  ID_INDICATOR_1,
+  ID_INDICATOR_2
 };
 
 
@@ -47,6 +51,12 @@ static void buttonHandler(uint8_t btnId, uint8_t btnState) {
       case ID_BUTTON_6:
       
       break;
+      case ID_INDICATOR_1:
+        Keyboard.press('[');
+      break;
+      case ID_INDICATOR_2:
+        Keyboard.press(']');
+      break;
     }
   } else {
     // btnState == BTN_OPEN.
@@ -71,6 +81,12 @@ static void buttonHandler(uint8_t btnId, uint8_t btnState) {
       case ID_BUTTON_6:
       
       break;
+      case ID_INDICATOR_1:
+        Keyboard.release('[');
+      break;
+      case ID_INDICATOR_2:
+        Keyboard.release(']');
+      break;
     }
   }
 }
@@ -82,6 +98,8 @@ static Button buttonThree(ID_BUTTON_3, buttonHandler);
 static Button buttonFour(ID_BUTTON_4, buttonHandler);
 static Button buttonFive(ID_BUTTON_5, buttonHandler);
 static Button buttonSix(ID_BUTTON_6, buttonHandler);
+static Button indicatorOne(ID_INDICATOR_1, buttonHandler);
+static Button indicatorTwo(ID_INDICATOR_2, buttonHandler);
 
 
 void setup() {
@@ -94,6 +112,8 @@ void setup() {
   pinMode(GPIO_BUTTON_4, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_5, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_6, INPUT_PULLUP);
+  pinMode(GPIO_BUTTON_7, INPUT_PULLUP);
+  pinMode(GPIO_BUTTON_8, INPUT_PULLUP);
 }
 
 
@@ -106,6 +126,8 @@ static void pollButtons() {
   buttonFour.update(digitalRead(GPIO_BUTTON_4));
   buttonFive.update(digitalRead(GPIO_BUTTON_5));
   buttonSix.update(digitalRead(GPIO_BUTTON_6));
+  indicatorOne.update(digitalRead(GPIO_BUTTON_7));
+  indicatorTwo.update(digitalRead(GPIO_BUTTON_8));
 }
 
 
