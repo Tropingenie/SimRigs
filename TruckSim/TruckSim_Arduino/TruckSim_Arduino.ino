@@ -1,6 +1,5 @@
 #include <debounce.h>
-// #include <Keyboard.h>
-#include <Joystick.h>
+#include <Keyboard.h>
 
 enum gpioAssignments{
   GPIO_BUTTON_1 = 2,
@@ -8,10 +7,9 @@ enum gpioAssignments{
   GPIO_BUTTON_3,
   GPIO_BUTTON_4,
   GPIO_BUTTON_5,
-  GPIO_BUTTON_6,
-  GPIO_INDICATOR_1,
-  GPIO_INDICATOR_2,
+  GPIO_BUTTON_6
 };
+
 
 enum idAssignments{
   ID_BUTTON_1 = 1,
@@ -19,34 +17,61 @@ enum idAssignments{
   ID_BUTTON_3,
   ID_BUTTON_4,
   ID_BUTTON_5,
-  ID_BUTTON_6,
-  ID_INDICATOR_1,
-  ID_INDICATOR_2,
+  ID_BUTTON_6
 };
 
-static Joystick_ Joystick(
-  JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
-  32, 0,                  // Button Count, Hat Switch Count
-  false, false, false,   // No X, Y, or Z Axis
-  false, false, false,   // No Rx, Ry, or Rz
-  false, false,          // No rudder or throttle
-  false, false, false  // No accelerator, brake, or steering
-  );
 
-// bool buttonStates[] = {false, false, false, false, false, false, false, false};
-
+bool buttonStates[] = {false, false, false, false, false, false};
 
 static void buttonHandler(uint8_t btnId, uint8_t btnState) {
   if (btnState == BTN_PRESSED) {
     Serial.println((String)"Pushed button " + btnId);
-    // buttonStates[btnId-1] = true;
+    buttonStates[btnId-1] = true;
     // See https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/
-    Joystick.setButton(btnId-1, 1);
+    switch (btnId){
+      case ID_BUTTON_1:
+        Keyboard.press('i');
+      break;
+      case ID_BUTTON_2:
+        Keyboard.press(',');
+      break;
+      case ID_BUTTON_3:
+        Keyboard.press('.');
+      break;
+      case ID_BUTTON_4:
+        Keyboard.press('/');
+      break;
+      case ID_BUTTON_5:
+        Keyboard.press('`');
+      break;
+      case ID_BUTTON_6:
+      
+      break;
+    }
   } else {
     // btnState == BTN_OPEN.
     Serial.println((String)"Released button " + btnId);
-    // buttonStates[btnId-1] = false;
-    Joystick.setButton(btnId-1, 0);
+    buttonStates[btnId-1] = false;
+    switch (btnId){
+      case ID_BUTTON_1:
+        Keyboard.release('i');
+      break;
+      case ID_BUTTON_2:
+        Keyboard.release(',');
+      break;
+      case ID_BUTTON_3:
+        Keyboard.release('.');
+      break;
+      case ID_BUTTON_4:
+        Keyboard.release('/');
+      break;
+      case ID_BUTTON_5:
+        Keyboard.release('`');
+      break;
+      case ID_BUTTON_6:
+      
+      break;
+    }
   }
 }
 
@@ -57,27 +82,22 @@ static Button buttonThree(ID_BUTTON_3, buttonHandler);
 static Button buttonFour(ID_BUTTON_4, buttonHandler);
 static Button buttonFive(ID_BUTTON_5, buttonHandler);
 static Button buttonSix(ID_BUTTON_6, buttonHandler);
-static Button indOne(ID_INDICATOR_1, buttonHandler);
-static Button indTwo(ID_INDICATOR_2, buttonHandler);
 
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  // Keyboard.begin();
-  Joystick.begin();
+  Keyboard.begin();
   pinMode(GPIO_BUTTON_1, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_2, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_3, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_4, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_5, INPUT_PULLUP);
   pinMode(GPIO_BUTTON_6, INPUT_PULLUP);
-  pinMode(GPIO_INDICATOR_1, INPUT_PULLUP);
-  pinMode(GPIO_INDICATOR_2, INPUT_PULLUP);
 }
 
 
-static inline void pollButtons() {
+static void pollButtons() {
   // update() will call buttonHandler() if PIN transitions to a new state and stays there
   // for multiple reads over 25+ ms.
   buttonOne.update(digitalRead(GPIO_BUTTON_1));
@@ -86,8 +106,6 @@ static inline void pollButtons() {
   buttonFour.update(digitalRead(GPIO_BUTTON_4));
   buttonFive.update(digitalRead(GPIO_BUTTON_5));
   buttonSix.update(digitalRead(GPIO_BUTTON_6));
-  indOne.update(digitalRead(GPIO_INDICATOR_1));
-  indTwo.update(digitalRead(GPIO_INDICATOR_2));
 }
 
 
