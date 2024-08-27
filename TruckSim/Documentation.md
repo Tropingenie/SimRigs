@@ -170,6 +170,26 @@ A cardboard box is an idea I got from another forum post, which sadly I can't fi
 
 Or I guess I could just buy a [real indicator switch](https://www.aliexpress.com/w/wholesale-turn-indicator-lever.html), like [hydr0wry](https://www.youtube.com/watch?v=jVhm9MZV-tQ) on YouTube does, but while that answers the question of what functions to use it for, it still doesn't solve the mounting problem.
 
+## The Button Box
+
+Obviously, I can't use cardboard forever, and with a monolever toggle switch installed it becomes clear that I'll need to prototype using something else: A 3D printer. Cardboard, while easy to work with, simply isn't rigid enough, not to mention the problems it has with mounting (both to the desk and to the Arduino).
+
+I download [FreeCAD](https://www.freecad.org/index.php) from [the Flathub package](https://flathub.org/apps/org.freecadweb.FreeCAD) (since the [Fedora package](https://rpms.remirepo.net/rpmphp/zoom.php?rpm=freecad) isn't available in the Fedora 40 repos), and get to work. There's two main things I want this first prototype to do: 1. Have some additional mounting to the desk and 2. Provide space for all six buttons and the monolever toggle switch.
+
+The beauty of the cardboard button box is I can take my measurements directly off it. From this super early prototype, I know the front panel will be about 200mm wide and 100mm tall. By creating a 2x4 grid on this panel I can find the centers of 8 mounting holes, and by measuring the buttons I find I need the diameters and depths of 12mm and 11mm respectively.  I'll initially use the first number verbatim (since I rounded it up anyways, meaning it should have enough tolerance), but I'll make the wall of the button panel 10mm thick to multiply evenly with my 0.4mm nozzle (note that the "two 0.4mm = 0.8mm" assumption [isn't entirely accurate](https://ellis3dp.com/Print-Tuning-Guide/articles/misconceptions.html#two-04mm-perimeters--08mm) but it will be close enough).
+
+![CAD sketch of button box front panel](image-14.png)
+
+I ended up going 200mm x 120mm in order to make the division cleaner (which also had the benefit of making the panel a square grid). I also left a 22mm hole for the monolever toggle switch.
+
+![CAD sketch of button box front panel](image-15.png)
+
+Measuring my desk, I find its thickness is about 20mm. By putting two rudimentary "shelves" I can make a basic clamp that should resist most movement with just a friction fit. I make these 75mm deep and 1cm thick, meaning I need to add an extra 40mm to the bottom edge of the button panel. I also throw in some support structure for good measure.
+
+![alt text](image-16.png)
+
+With the model "finished" I can export to STL and slice it using PrusaSlicer, then print it on my (relatively modified) Ender3V2 once I am done fixing it.
+
 ## The Rig
 
 While coming up with code and throwing a breadboard in a cardboard box is fun, we'll also need something to mount everything to (preferably with a nice set of castor wheels to make it portable). As mentioned, I already have a wheel and pedals, so it all comes down to mounting. Extruded aluminum rigs are pretty common thanks to the simracing scene, but to keep costs low I'm aiming to use pine (or another cheap wood) 2x4s held together with a box of screws from the Home Depot near me.
@@ -200,7 +220,7 @@ That's a good estimate, but honestly these napkin maths hardly inspire confidenc
 
 <img src="image-6.png" width="400">
 
-Having mocked things up in CAD gives some more insight into how the design goes together. I had to lower the height of the "front shelf" that the seat will go on, so that it would be low enough to slide under my desk without any moving parts, while the "rear shelf" that the wheel mounts to ended up only having enough room for a single vertical 2x4. Having made changes to the seat design, I held off on mocking up the pedal riser for now, and honestly it isn't even that necessary for a first prototype.
+Having mocked things up in TinkerCAD gives some more insight into how the design goes together. I had to lower the height of the "front shelf" that the seat will go on, so that it would be low enough to slide under my desk without any moving parts, while the "rear shelf" that the wheel mounts to ended up only having enough room for a single vertical 2x4. Having made changes to the seat design, I held off on mocking up the pedal riser for now, and honestly it isn't even that necessary for a first prototype.
 
 In terms of materials, this CAD mockup gives me an estimate of 239 inches (20 feet) of 2x4, and about 6 feet of 2' wide 3/4" plywood, along with whatever fasteners and other hardware will be needed (glue, screws, bolts, angle brackets, castor wheels, etc.). Cost-wise, there's something to be said about doing this all with 2x4s, but I managed to find a source of free 3/4" plywood (my parents' did some construction recently and kept the spare materials).
 
